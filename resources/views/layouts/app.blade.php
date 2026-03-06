@@ -7,13 +7,14 @@
     <title>{{ $title ?? config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('layouts.partials.styles')
     @stack('css')
 </head>
 <body class="flex">
-    @if(auth())
-        @include('layouts.partials.navbar')
+    @if(auth()->check())
+        @include('layouts.partials.sidebar')
     @endif
-    <main>
+    <main class="w-full">
         @yield('content')
     </main>
 </body>

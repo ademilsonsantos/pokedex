@@ -15,11 +15,11 @@
                 @csrf
                 <div class="w-full flex flex-col">
                     <label for="">Email</label>
-                    <input name="email" class="w-full bg-gray-50 px-3 py-2" type="text" placeholder="Digite seu usuário">
+                    <input name="email" class="w-full" type="text" placeholder="Digite seu usuário">
                 </div>
                 <div class="w-full flex flex-col">
                     <label for="">Senha</label>
-                    <input name="password" class="w-full bg-gray-50 px-3 py-2" type="text" placeholder="Digite sua senha">
+                    <input name="password" class="w-full" type="text" placeholder="Digite sua senha">
                 </div>
                 <button class="w-full text-white py-2 bg-primary">Login</button>
             </form>

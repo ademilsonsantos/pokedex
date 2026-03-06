@@ -8,4 +8,28 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-primary: #2A7B9B;
+    --color-success: #57C785;
+    --color-danger: #DA5A5A;
+    --color-warning: #D7DA5A;
+    --color-secondary: #AAA;
+}
+
+.bg-grandient-bt {
+    background: #2A7B9B;
+    background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 87%, rgba(215, 218, 90, 1) 100%);
+}
+
+input {
+    background-color: #f2f2f2;
+    border: 1px solid #aaa;
+    padding: 0.2rem 0.5rem;
+}
+
+button, .btn {
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
 }
