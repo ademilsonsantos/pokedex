@@ -1,4 +1,6 @@
-<?
+<?php
+
+namespace App\DTO;
 
 class PokemonDTO {
     public function __construct(
