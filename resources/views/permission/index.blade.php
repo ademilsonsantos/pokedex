@@ -28,7 +28,9 @@
                             <td class="p-1">
                                 <div class="flex gap-3 justify-end">
                                     <a href="{{route('permission.edit', $role->id) }}" class="btn bg-warning"><i class="fa fa-pencil"></i></a>
-                                    <form action="{{route('permission.destroy', $role->id) }}">
+                                    <form action="{{route('permission.destroy', $role->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn bg-danger"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </div>

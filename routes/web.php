@@ -7,5 +7,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [PokedexController::class, 'index'])->name('pokedex.index');
 
-    Route::resource('permission', PermissionController::class);;
+    Route::resource('permission', PermissionController::class, ['except' => 'show']);;
 });

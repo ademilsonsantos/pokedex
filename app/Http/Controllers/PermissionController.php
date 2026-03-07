@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\PermissionEnum;
 use App\Http\Requests\PermissionRequest;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
@@ -26,26 +25,35 @@ class PermissionController extends Controller
 
     public function store(PermissionRequest $request)
     {
-        // Logic to store a new permission
-    }
+        $role = Role::findOrCreate($request->name);
+        $role->syncPermissions($request->permissions);
 
-    public function show($id)
-    {
-        // Logic to show a specific permission
+        return redirect()->route('permission.index')->with('success', 'Permissão criada com sucesso!');
     }
 
     public function edit($id)
     {
-        // Logic to show the edit form for a specific permission
+        $role = Role::findById($id);
+        $permissions = PermissionEnum::cases();
+
+        return view('permission.edit', compact('role', 'permissions'));
     }
 
-    public function update(Request $request, $id)
+    public function update(PermissionRequest $request, $id)
     {
-        // Logic to update a specific permission
+        $role = Role::findById($id);
+        $role->revokePermissionTo($role->permissions);
+        $role->syncPermissions($request->permissions);
+
+        return redirect()->route('permission.index')->with('success', 'Permissão atualizada com sucesso!');
     }
 
     public function destroy($id)
     {
-        // Logic to delete a specific permission
+        $role = Role::findById($id);
+        $role->revokePermissionTo($role->permissions);
+        $role->delete();
+
+        return redirect()->route('permission.index')->with('success', 'Permissão deletada com sucesso!');
     }
 }
