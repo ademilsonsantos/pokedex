@@ -72,9 +72,6 @@ Criar link simbolico para pasta publica onde ficará as imagens
 php artisan storage:link
 ```
 
-Email: <viewer|editor|admin>@example.com <br>
-Senha: password
-
 > **Atenção**
 >
 > É necessário ter o **SSL configurado corretamente**.  
@@ -101,7 +98,9 @@ A aplicação ficará disponível em:
 ```
 http://localhost:8000
 ```
-
+**Dados para login**
+Email: <viewer|editor|admin>@example.com <br>
+Senha: password
 ---
 
 ## Estrutura do Projeto
