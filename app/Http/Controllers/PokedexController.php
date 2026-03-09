@@ -6,6 +6,7 @@ use App\Http\Requests\PokemonRequest;
 use App\Models\Pokemon;
 use App\Services\PokeApi\PokeApiClient;
 use App\Services\PokemonImporter;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PokedexController extends Controller
 {
     public function index(Request $request) {
+        Gate::authorize('viewAny', Pokemon::class);
         $pokemons = Pokemon::paginate(15);
         $name = $request->name;
 
@@ -24,6 +26,7 @@ class PokedexController extends Controller
     }
 
     public function destroy($id) {
+        Gate::authorize('delete', Pokemon::class);
         try {
             $pokemon = Pokemon::findOrFail($id);
             Storage::disk('public')->delete($pokemon->sprite);
@@ -36,6 +39,7 @@ class PokedexController extends Controller
     }
 
     public function import(PokemonRequest $request, PokemonImporter $import) {
+        Gate::authorize('create', Pokemon::class);
         try {
             $import->import($request->name);
             return redirect()->route('pokemon.index')->with('success', 'Pokemon importado com sucesso!');
@@ -47,6 +51,7 @@ class PokedexController extends Controller
     }
 
     public function favorite($id, PokemonImporter $import) {
+        Gate::authorize('create', Pokemon::class);
         try {
             $import->updateFavorite($id, !auth()->user()->pokemon->contains($id));
             return redirect()->route('pokemon.index')->with('success', 'Pokemon favoritado com sucesso!');
@@ -59,9 +64,11 @@ class PokedexController extends Controller
     public function show($id, PokeApiClient $client) {
         try {
             $pokemon = Pokemon::findOrFail($id);
+
+            Gate::authorize('view', $pokemon);
             $pokemonDetail = $client->getPokemonByName($pokemon->name);
 
-            if($pokemonDetail['error']) {
+            if(isset($pokemonDetail['error'])) {
                 return redirect()->route('pokemon.index')->with('error', $pokemonDetail['error']);
             }
 

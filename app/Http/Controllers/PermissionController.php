@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\PermissionEnum;
 use App\Http\Requests\PermissionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
@@ -18,6 +20,7 @@ class PermissionController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', Permission::class);
         $permissions = PermissionEnum::cases();
 
         return view('permission.create', compact('permissions'));
@@ -25,6 +28,7 @@ class PermissionController extends Controller
 
     public function store(PermissionRequest $request)
     {
+        Gate::authorize('create', Permission::class);
         $role = Role::findOrCreate($request->name);
         $role->syncPermissions($request->permissions);
 
@@ -50,6 +54,7 @@ class PermissionController extends Controller
 
     public function destroy($id)
     {
+        Gate::authorize('delete', Permission::class);
         $role = Role::findById($id);
         $role->revokePermissionTo($role->permissions);
         $role->delete();
