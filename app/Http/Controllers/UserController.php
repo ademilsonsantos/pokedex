@@ -36,8 +36,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        if ($request->has('roles')) {
-            $user->assignRole($request->roles);
+        if ($request->has('role')) {
+            $user->assignRole($request->role);
         }
 
         return redirect()->route('user.index')->with('success', 'Usuário criado com sucesso!');
