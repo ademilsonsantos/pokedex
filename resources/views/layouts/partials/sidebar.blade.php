@@ -9,7 +9,7 @@
                 <button type="submit"><i class="fa-solid fa-arrow-right-from-bracket text-black"></i></button>
             </form>
         </div>
-        <ul>
+        <ul class="flex flex-col gap-1">
             <li>
                 <a href="{{route('pokemon.index')}}">Pokedex</a>
             </li>

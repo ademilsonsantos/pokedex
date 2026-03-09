@@ -20,7 +20,7 @@
     background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 87%, rgba(215, 218, 90, 1) 100%);
 }
 
-input {
+input, select {
     background-color: #f2f2f2;
     border: 1px solid #aaa;
     padding: 0.2rem 0.5rem;

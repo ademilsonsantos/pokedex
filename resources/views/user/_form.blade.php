@@ -1,4 +1,4 @@
-<div class="w-5/12 flex flex-wrap gap-5">
+<div class="w-full flex flex-wrap gap-5">
     <div class="w-full flex flex-col">
         <label for="">Nome</label>
         <input type="text" name="name" class="w-full rounded" placeholder="Nome do usuário"

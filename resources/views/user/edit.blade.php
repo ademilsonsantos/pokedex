@@ -3,7 +3,7 @@
     <div class="w-full p-10 flex flex-col gap-5">
         <a href="{{route('user.index')}}">Voltar</a>
         <h1>Editar Usuário</h1>
-        <div class="w-full">
+        <div class="w-5/12">
             <form action="{{ route('user.update', $user->id) }}" method="POST" class="w-full flex flex-col gap-5">
                 @csrf
                 @method('PUT')
