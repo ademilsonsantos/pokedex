@@ -6,13 +6,13 @@ use App\Enums\PermissionEnum;
 use App\Http\Requests\PermissionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
     public function index()
     {
+        Gate::authorize('viewAny', Role::class);
         $roles = Role::paginate(10);
 
         return view('permission.index', compact('roles'));
@@ -20,7 +20,7 @@ class PermissionController extends Controller
 
     public function create()
     {
-        Gate::authorize('create', Permission::class);
+        Gate::authorize('create', Role::class);
         $permissions = PermissionEnum::cases();
 
         return view('permission.create', compact('permissions'));
@@ -28,7 +28,7 @@ class PermissionController extends Controller
 
     public function store(PermissionRequest $request)
     {
-        Gate::authorize('create', Permission::class);
+        Gate::authorize('create', Role::class);
         $role = Role::findOrCreate($request->name);
         $role->syncPermissions($request->permissions);
 
@@ -38,6 +38,7 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $role = Role::findById($id);
+        Gate::authorize('update', $role);
         $permissions = PermissionEnum::cases();
 
         return view('permission.edit', compact('role', 'permissions'));
@@ -46,6 +47,7 @@ class PermissionController extends Controller
     public function update(PermissionRequest $request, $id)
     {
         $role = Role::findById($id);
+         Gate::authorize('update', $role);
         $role->revokePermissionTo($role->permissions);
         $role->syncPermissions($request->permissions);
 
@@ -54,8 +56,8 @@ class PermissionController extends Controller
 
     public function destroy($id)
     {
-        Gate::authorize('delete', Permission::class);
         $role = Role::findById($id);
+        Gate::authorize('delete', $role);
         $role->revokePermissionTo($role->permissions);
         $role->delete();
 
