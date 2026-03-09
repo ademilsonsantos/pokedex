@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Minha Pokédex'])
 @section('content')
     <div class="w-full p-10">
-        <h1 class="text-2xl font-bold mb-4">Importar pokemons</h1>
+        <h1 class="text-2xl font-bold mb-4">Pokemons importados</h1>
         <div class="w-full">
             @if (session('success'))
                 <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
@@ -15,8 +15,8 @@
             @endif
         </div>
         <div class="w-full mt-10 flex gap-5">
-            @role('viewer')
-                <div class="w-4/12 flex flex-col">
+            @can(\App\Enums\PermissionEnum::POKEMON_VIEW->value)
+                <div class="w-5/12 flex flex-col">
                     <label for="">Pesquisar pokemon por nome.</label>
                     <form action="{{ route('pokemon.index') }}" class="w-full flex gap-5 items-start" method="GET">
                         @csrf
@@ -33,9 +33,9 @@
                         </button>
                     </form>
                 </div>
-            @endrole
-            @role('editor')
-                <div class="w-4/12 flex flex-col">
+            @endcan
+            @can(\App\Enums\PermissionEnum::POKEMON_IMPORT->value)
+                <div class="w-5/12 flex flex-col">
                     <label for="">Importar pokemon por nome.</label>
                     <form action="{{ route('pokemon.import') }}" class="w-full flex gap-5 items-start" method="POST">
                         @csrf
@@ -52,11 +52,11 @@
                         </button>
                     </form>
                 </div>
-            @endrole
+            @endcan
         </div>
         <div id="pokemon-container" class="w-full mt-10 flex flex-wrap gap-5">
             @forelse($pokemons as $pokemon)
-                <div class="w-2/12 bg-gray-200 p-5 rounded flex flex-col items-center justify-between">
+                <div class="w-3/12 [1400px]:w-2/12 bg-gray-200 p-5 rounded flex flex-col items-center justify-between">
                     <h2 class="text-xl font-bold mb-2">{{ $pokemon->name }}</h2>
                     <img src="storage/{{ $pokemon->sprite }}" alt="Pokemon Image">
                     <h3 class="text-lg font-semibold mt-4">Habilidades:</h3>
@@ -68,14 +68,14 @@
                         </ul>
                     @endif
                     <div class="w-ful flex items-center gap-3">
-                        @role('admin')
+                        @can(\App\Enums\PermissionEnum::POKEMON_DELETE->value)
                             <form action="{{ route('pokemon.destroy', $pokemon->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn bg-danger mt-4"><i class="fa fa-trash"></i></button>
                             </form>
-                        @endrole
-                        @hasanyrole('admin|editor')
+                        @endcan
+                        @can(\App\Enums\PermissionEnum::POKEMON_FAVORITE->value)
                             <form action="{{ route('pokemon.favorite', $pokemon->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -87,7 +87,7 @@
                                             class="fa fa-heart text-secondary"></i></button>
                                 @endif
                             </form>
-                        @endrole
+                        @endcan
                         <a href="{{ route('pokemon.show', $pokemon->id) }}" class="btn mt-4 bg-primary"><i
                                 class="fa fa-eye"></i></a>
                     </div>

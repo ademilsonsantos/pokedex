@@ -26,9 +26,9 @@ class PokedexController extends Controller
     }
 
     public function destroy($id) {
-        Gate::authorize('delete', Pokemon::class);
         try {
             $pokemon = Pokemon::findOrFail($id);
+            Gate::authorize('delete', $pokemon);
             Storage::disk('public')->delete($pokemon->sprite);
             $pokemon->delete();
             return redirect()->route('pokemon.index')->with('success', 'Pokemon removido com sucesso!');
