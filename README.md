@@ -28,15 +28,14 @@ git clone https://github.com/ademilsonsantos/pokedex
 cd pokedex
 ```
 
-Instale as dependências: <br>
-
 Caso não tenha o node instalado (Opcional).
-Faça o download do [aqui](https://nodejs.org/pt-br/download)
+Faça o download [aqui](https://nodejs.org/pt-br/download)
 
 Caso não tenha o laravel instalado (Opcional).
 ```bash
 composer global require laravel/installer
 ```
+Instale as dependências: <br>
 
 ```bash
 composer install
