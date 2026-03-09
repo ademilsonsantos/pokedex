@@ -6,8 +6,10 @@ use App\Enums\PermissionEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
 {
@@ -16,11 +18,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
         $roleViewer = Role::findOrCreate('viewer');
         $roleEditor = Role::findOrCreate('editor');
         $roleAdmin = Role::findOrCreate('admin');
-
-        foreach (PermissionEnum::cases() as $permission) Permission::findOrCreate($permission->value);
 
         $roleViewer->givePermissionTo(PermissionEnum::POKEMON_VIEW->value);
 
@@ -48,19 +50,19 @@ class RoleSeeder extends Seeder
         $userViewer = User::factory()->create([
             'name' => 'Viewer User',
             'email' => 'viewer@example.com',
-            'password' => 'password',
+            'password' => Hash::make('password'),
         ])->assignRole($roleViewer);
 
         $userEditor = User::factory()->create([
             'name' => 'Editor User',
             'email' => 'editor@example.com',
-            'password' => 'password',
+            'password' => Hash::make('password'),
         ])->assignRole($roleEditor);
 
         $userAdmin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => 'password',
+            'password' => Hash::make('password'),
         ])->assignRole($roleAdmin);
     }
 }
