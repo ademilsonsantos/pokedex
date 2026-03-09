@@ -13,6 +13,7 @@ Antes de começar, você precisa ter instalado:
 
 * PHP 8.x
 * Composer
+* Laravel
 * Banco de dados (MySQL)
 
 ---
@@ -26,7 +27,12 @@ git clone https://github.com/ademilsonsantos/pokedex
 cd pokedex
 ```
 
-Instale as dependências:
+Instale as dependências: <br>
+
+Caso não tenha o laravel instalado (Opcional).
+```bash
+composer global require laravel/installer
+```
 
 ```bash
 composer install
