@@ -15,11 +15,21 @@
                 @csrf
                 <div class="w-full flex flex-col">
                     <label for="">Email</label>
-                    <input name="email" class="w-full" type="text" placeholder="Digite seu usuário">
+                    <input name="email" class="w-full" type="text" placeholder="Digite seu usuário" value="{{old('email')}}">
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="w-full flex flex-col">
                     <label for="">Senha</label>
-                    <input name="password" class="w-full" type="text" placeholder="Digite sua senha">
+                    <div class="w-full flex items-center relative">
+                        <input name="password" class="w-full" type="password" placeholder="Digite sua senha">
+                        <i class="fa fa-eye absolute right-2 text-gray-600" onclick="showHidePassword()"></i>
+                        <i class="fa fa-eye-slash right-2 text-gray-600 absolute hidden!" onclick="showHidePassword()"></i>
+                    </div>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <button class="w-full text-white py-2 bg-primary">Login</button>
             </form>
