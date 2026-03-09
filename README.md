@@ -98,7 +98,7 @@ A aplicação ficará disponível em:
 ```
 http://localhost:8000
 ```
-**Dados para login**
+**Dados para login** <br>
 Email: <viewer|editor|admin>@example.com <br>
 Senha: password
 ---
