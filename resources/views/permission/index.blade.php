@@ -4,10 +4,10 @@
         <h1>Permissoes</h1>
         <div class="w-full">
             <div class="w-full flex gap-5">
-                <div class="flex items-casdasenter gap-2 w-5/12">
-                    <input type="text" class="w-10/12 rounded" placeholder="Pesquisar">
-                    <button class="bg-secondary"><i class="fa fa-search"></i></button>
-                </div>
+                <form class="flex items-casdasenter gap-2 w-5/12" action="{{ route('permission.search') }}" method="GET">
+                    <input name="name" type="text" class="w-10/12 rounded" placeholder="Pesquisar" value="{{$name ?? ''}}">
+                    <button type="submit" class="bg-secondary"><i class="fa fa-search"></i></button>
+                </form>
                 <a href="{{ route('permission.create') }}" class="btn bg-primary">Adicionar</a>
             </div>
         </div>
