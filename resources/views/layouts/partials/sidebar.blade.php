@@ -11,11 +11,11 @@
         </div>
         <ul>
             <li>
-                <a href="">Pokedex</a>
+                <a href="{{route('pokemon.index')}}">Pokedex</a>
             </li>
             @role('admin')
                 <li>
-                    <a href="">Usuários</a>
+                    <a href="{{route('user.index')}}">Usuários</a>
                 </li>
                 <li>
                     <a href="{{route('permission.index')}}">Permissões</a>
