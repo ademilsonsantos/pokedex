@@ -2,7 +2,7 @@
 @section('content')
     <div class="w-full p-10">
         <h1 class="text-2xl font-bold mb-4">Importar pokemons</h1>
-        <div class="w-full mt-10 flex gap-5">
+        <div class="w-full">
             @if (session('success'))
                 <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
                     {{ session('success') }}
@@ -13,6 +13,8 @@
                     {{ session('error') }}
                 </div>
             @endif
+        </div>
+        <div class="w-full mt-10 flex gap-5">
             @role('viewer')
                 <div class="w-4/12 flex flex-col">
                     <label for="">Pesquisar pokemon por nome.</label>
@@ -86,7 +88,8 @@
                                 @endif
                             </form>
                         @endrole
-                        <a href="{{route('pokemon.show', $pokemon->id)}}" class="btn bg-primary"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('pokemon.show', $pokemon->id) }}" class="btn mt-4 bg-primary"><i
+                                class="fa fa-eye"></i></a>
                     </div>
                 </div>
             @empty
