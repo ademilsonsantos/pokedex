@@ -14,6 +14,7 @@ Antes de começar, você precisa ter instalado:
 * PHP 8.x
 * Composer
 * Laravel
+* NodeJs
 * Banco de dados (MySQL)
 
 ---
@@ -28,6 +29,9 @@ cd pokedex
 ```
 
 Instale as dependências: <br>
+
+Caso não tenha o node instalado (Opcional).
+Faça o download do [aqui](https://nodejs.org/pt-br/download)
 
 Caso não tenha o laravel instalado (Opcional).
 ```bash
