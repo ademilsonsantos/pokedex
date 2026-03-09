@@ -29,7 +29,7 @@
                                 <div class="flex gap-3 justify-end">
                                     <a href="{{ route('permission.edit', $role->id) }}" class="btn bg-warning"><i
                                             class="fa fa-pencil"></i></a>
-                                    @if ($role->id !== auth()->id())
+                                    @if (!auth()->user()->hasRole($role->name))
                                         <form action="{{ route('permission.destroy', $role->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
