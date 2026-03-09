@@ -23,7 +23,7 @@ Clone o projeto:
 
 ```bash
 git clone https://github.com/ademilsonsantos/pokedex
-cd projeto
+cd pokedex
 ```
 
 Instale as dependências:
