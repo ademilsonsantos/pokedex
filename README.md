@@ -78,7 +78,7 @@ Senha: password
 
 > **Atenção**
 >
-> É necessário o **SSL configurado corretamente**.  
+> É necessário ter o **SSL configurado corretamente**.  
 > Caso contrário a chamada para a API pode retornar o erro **cURL error 60 (SSL certificate problem)**.
 
 ---
