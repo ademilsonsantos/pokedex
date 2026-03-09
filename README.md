@@ -63,7 +63,7 @@ Criar link simbolico para pasta publica onde ficará as imagens
 php artisan storage:link
 ```
 
-Email: <view|editor|admin>@example.com
+Email: <viewer|editor|admin>@example.com <br>
 Senha: password
 
 ---
