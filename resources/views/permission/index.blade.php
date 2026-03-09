@@ -8,7 +8,7 @@
                     <input type="text" class="w-10/12 rounded" placeholder="Pesquisar">
                     <button class="bg-secondary"><i class="fa fa-search"></i></button>
                 </div>
-                <a href="{{route('permission.create')}}" class="btn bg-primary">Adicionar</a>
+                <a href="{{ route('permission.create') }}" class="btn bg-primary">Adicionar</a>
             </div>
         </div>
         <div class="w-full">
@@ -27,12 +27,16 @@
                             <td class="text-center">{{ $role->created_at->format('d/m/Y H:i:s') }}</td>
                             <td class="p-1">
                                 <div class="flex gap-3 justify-end">
-                                    <a href="{{route('permission.edit', $role->id) }}" class="btn bg-warning"><i class="fa fa-pencil"></i></a>
-                                    <form action="{{route('permission.destroy', $role->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn bg-danger"><i class="fa fa-trash"></i></button>
-                                    </form>
+                                    <a href="{{ route('permission.edit', $role->id) }}" class="btn bg-warning"><i
+                                            class="fa fa-pencil"></i></a>
+                                    @if ($role->id !== auth()->id())
+                                        <form action="{{ route('permission.destroy', $role->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn bg-danger"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
