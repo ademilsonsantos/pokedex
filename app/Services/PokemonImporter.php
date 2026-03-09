@@ -19,6 +19,10 @@ class PokemonImporter
         try {
             $data = $this->client->getPokemonByName($name);
 
+            if(isset($data['error'])) {
+                throw new \Exception($data['error']);
+            }
+
             $abilities = array_map(function ($ability) {
                 return [
                     'name' => $ability['ability']['name']

@@ -93,67 +93,8 @@
                 <span>Nenhum pokemon encontrado.</span>
             @endforelse
         </div>
+        <div class="w-full mt-10">
+            {{ $pokemons->links() }}
+        </div>
     </div>
 @endsection
-{{-- @push('js')
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
-        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        const pokeByNammeApiUrl = 'https://pokeapi.co/api/v2/pokemon';
-        const pokemonContainerJQ = $('#pokemon-container');
-
-        $(document).ready(function() {
-            $('#btn-search').on('click', function() {
-                $(this).addClass('loading');
-
-                var pokemonName = $('#pokemon-name').val();
-                if (pokemonName) {
-                    $.ajax({
-                        url: `${pokeByNammeApiUrl}/${pokemonName.toLowerCase()}`,
-                        method: 'GET',
-                        timeout: 5000,
-                        success: function(response) {
-                            // Processar a resposta e atualizar a interface
-                            montarPokemonCard({
-                                name: response.name,
-                                image: response.sprites.front_default,
-                                abilities: response.abilities
-                            })
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            $(this).removeClass('loading');
-                            if (textStatus === 'timeout') {
-                                alert(
-                                    'A requisição demorou demais. Tente novamente mais tarde.');
-                            } else if (jqXHR.status === 404) {
-                                alert('Pokemon não encontrado.');
-                            } else if (jqXHR.status === 500) {
-                                alert('Erro interno no servidor. Tente novamente mais tarde.');
-                            } else {
-                                console.log('Erro:', errorThrown);
-                                alert('Ocorreu um erro. Tente novamente mais tarde.');
-                            }
-                        }
-                    });
-                } else {
-                    alert('Por favor, digite o nome do pokemon.');
-                }
-            });
-
-            function montarPokemonCard(pokemon) {
-                const pokemonCard = `
-                    <div class="w-2/12 bg-gray-200 p-5 rounded flex flex-col items-center">
-                        <h2 class="text-xl font-bold mb-2">${pokemon.name}</h2>
-                        <img src="${pokemon.image}" alt="Pokemon Image" >
-                        <h3 class="text-lg font-semibold mt-4">Habilidades:</h3>
-                       <ul>
-                            ${pokemon.abilities.map(ability => `<li>${ability.ability.name}</li>`).join('')}
-                        </ul>
-                        <button class="btn bg-success mt-4">Importar</button>
-                    </div>
-                `;
-                pokemonContainerJQ.html(pokemonCard);
-            }
-        });
-    </script>
-@endpush --}}

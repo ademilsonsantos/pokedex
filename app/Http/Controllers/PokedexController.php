@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PokemonRequest;
 use App\Models\Pokemon;
+use App\Services\PokeApi\PokeApiClient;
 use App\Services\PokemonImporter;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PokedexController extends Controller
 {
     public function index(Request $request) {
-        $pokemons = Pokemon::all();
+        $pokemons = Pokemon::paginate(15);
         $name = $request->name;
 
         if($name) {
@@ -55,9 +56,19 @@ class PokedexController extends Controller
         }
     }
 
-    public function show($id) {
-        $pokemon = Pokemon::findOrFail($id);
+    public function show($id, PokeApiClient $client) {
+        try {
+            $pokemon = Pokemon::findOrFail($id);
+            $pokemonDetail = $client->getPokemonByName($pokemon->name);
 
-        return view('pokedex.show', compact('pokemon'));
+            if($pokemonDetail['error']) {
+                return redirect()->route('pokemon.index')->with('error', $pokemonDetail['error']);
+            }
+
+            return view('pokedex.show', compact('pokemon', 'pokemonDetail'));
+        } catch (\Exception $e) {
+            Log::error('Erro ao buscar detalhes do Pokemon: ' . $e->getMessage());
+            return redirect()->route('pokemon.index')->with('error', 'Ocorreu um erro ao buscar os detalhes do Pokemon');
+        }
     }
 }
