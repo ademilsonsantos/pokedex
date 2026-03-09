@@ -25,6 +25,7 @@ class RoleSeeder extends Seeder
         $roleViewer->givePermissionTo(PermissionEnum::POKEMON_VIEW->value);
 
         $roleEditor->syncPermissions([
+            PermissionEnum::POKEMON_VIEW->value,
             PermissionEnum::POKEMON_IMPORT->value,
             PermissionEnum::POKEMON_FAVORITE->value,
         ]);
@@ -39,22 +40,25 @@ class RoleSeeder extends Seeder
             PermissionEnum::ROLE_UPDATE->value,
             PermissionEnum::ROLE_DELETE->value,
             PermissionEnum::POKEMON_DELETE->value,
+            PermissionEnum::POKEMON_VIEW->value,
+            PermissionEnum::POKEMON_IMPORT->value,
+            PermissionEnum::POKEMON_FAVORITE->value,
         ]);
 
         $userViewer = User::factory()->create([
-            'name' => 'User viewer',
+            'name' => 'Viewer User',
             'email' => 'viewer@example.com',
             'password' => 'password',
         ])->assignRole($roleViewer);
 
         $userEditor = User::factory()->create([
-            'name' => 'User editor',
+            'name' => 'Editor User',
             'email' => 'editor@example.com',
             'password' => 'password',
         ])->assignRole($roleEditor);
 
         $userAdmin = User::factory()->create([
-            'name' => 'User admin',
+            'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => 'password',
         ])->assignRole($roleAdmin);

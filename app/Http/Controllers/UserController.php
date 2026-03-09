@@ -77,4 +77,12 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', 'Usuário deletado com sucesso!');
     }
+
+    public function search(Request $request) {
+        Gate::authorize('viewAny', User::class);
+        $name = $request->name;
+        $users = User::where('name', 'like', "%$name%")->paginate(10);
+
+        return view('user.index', compact('users', 'name'));
+    }
 }

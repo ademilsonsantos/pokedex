@@ -63,4 +63,12 @@ class PermissionController extends Controller
 
         return redirect()->route('permission.index')->with('success', 'Permissão deletada com sucesso!');
     }
+
+    public function search(Request $request)
+    {
+        Gate::authorize('viewAny', Role::class);
+        $roles = Role::where('name', 'like', "%{$request->name}%")->paginate(10);
+
+        return view('permission.index', compact('roles'));
+    }
 }
