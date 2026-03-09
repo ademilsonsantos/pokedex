@@ -33,10 +33,22 @@ composer install
 npm install
 ```
 
-Caso não haja o .env.example, configure o ambiente:
+Configure o ambiente, para Windows:
+
+```bash
+copy .env.example .env
+
+```
+
+Para Linux:
 
 ```bash
 cp .env.example .env
+```
+
+Gerando a chave:
+
+```bash
 php artisan key:generate
 ```
 
@@ -44,6 +56,11 @@ Execute as migrations juntamente com o seeder para criar os usuários Viewer, Ed
 
 ```bash
 php artisan migrate --seed
+```
+Criar link simbolico para pasta publica onde ficará as imagens
+
+```bash
+php artisan storage:link
 ```
 
 Email: <view|editor|admin>@example.com
