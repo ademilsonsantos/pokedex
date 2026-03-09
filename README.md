@@ -11,7 +11,7 @@
 
 Antes de começar, você precisa ter instalado:
 
-* PHP 8.x
+* PHP 8.2
 * Composer
 * Laravel
 * NodeJs
